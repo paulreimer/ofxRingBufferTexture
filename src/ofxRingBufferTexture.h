@@ -20,7 +20,7 @@ public:
   ofxRingBufferTexture();
   ~ofxRingBufferTexture();
   
-  void setup(const size_t _spectrumSize, const size_t _numFrames);
+  void setup(const size_t _width, const size_t _numFrames);
   void uploadToTexture();
   void addFrame(const std::vector<float>& frame);
   
@@ -33,6 +33,6 @@ public:
   size_t framesProcessed;
   std::deque<std::vector<float> > queuedFrames;
   
-  size_t spectrumSize;
+  size_t width;
   size_t numFrames;
 };

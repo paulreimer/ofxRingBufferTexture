@@ -14,7 +14,7 @@
 ofxRingBufferTexture::ofxRingBufferTexture()
 : currentFrameOffset(0)
 , framesProcessed(0)
-, spectrumSize(0)
+, width(0)
 , numFrames(0)
 {}
 
@@ -24,22 +24,22 @@ ofxRingBufferTexture::~ofxRingBufferTexture()
 
 //--------------------------------------------------------------
 void
-ofxRingBufferTexture::setup(const size_t _spectrumSize, const size_t _numFrames)
+ofxRingBufferTexture::setup(const size_t _width, const size_t _numFrames)
 {
-  spectrumSize = _spectrumSize;
+  width = _width;
   numFrames = _numFrames;
 
   ofFbo::Settings settings;
-  settings.width          = spectrumSize;
+  settings.width          = width;
   settings.height         = numFrames;
 	settings.useDepth       = false;				// whether to use depth buffer or not
 	settings.useStencil     = false;				// whether to use stencil buffer or not
 	settings.textureTarget  = GL_TEXTURE_RECTANGLE_ARB;
 //	settings.internalformat = GL_LUMINANCE32F_ARB;			// GL_RGBA, GL_RGBA16F_ARB, GL_RGBA32F_ARB, GL_LUMINANCE32F_ARB etc.
   framebuffer.allocate(settings);
-//  framebuffer.allocate(spectrumSize, numFrames, GL_LUMINANCE);
+//  framebuffer.allocate(width, numFrames, GL_LUMINANCE);
 
-  texture.allocate(spectrumSize, numFrames, GL_LUMINANCE32F_ARB, true);
+  texture.allocate(width, numFrames, GL_LUMINANCE32F_ARB, true);
   texture.setTextureMinMagFilter(GL_NEAREST, GL_NEAREST);
 }
 
@@ -91,7 +91,7 @@ ofxRingBufferTexture::uploadToTexture()
     // draw 2 rectangle sections from current:max (older) then from 0:current (newer)
     framebuffer.begin();
     {
-      float w = spectrumSize;
+      float w = width;
       float totalH = MIN(framesProcessed, numFrames);
       float olderH = totalH - firstFrameOffset;
       
