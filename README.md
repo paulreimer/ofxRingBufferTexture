@@ -8,6 +8,7 @@ class testApp
 : public ofBaseApp
 {
 public:
+
   void setup();
   void draw();
   void audioIn(float* input, int bufferSize, int nChannels);
