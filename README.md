@@ -1,6 +1,6 @@
-## How to use in an openFrameworks app
+### How to use in an openFrameworks app
  
-# testApp.h
+#### testApp.h
 ```c++
 #include "ofxRingBufferTexture.h"
 
@@ -16,7 +16,7 @@ public:
 };
 ``` 
 
-# testApp.cpp
+#### testApp.cpp
 ```c++
 //--------------------------------------------------------------
 void
